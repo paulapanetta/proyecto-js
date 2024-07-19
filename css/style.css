@@ -1,0 +1,168 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f9f9f9;
+}
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+nav li {
+    margin-right: 20px;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+#productos {
+    flex-basis: 60%;
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#productos ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#productos li {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+}
+#productos img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+#productos h3 {
+    font-weight: bold;
+    margin-top: 0;
+}
+#productos p {
+    margin-bottom: 10px;
+}
+.agregar-al-carrito {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.agregar-al-carrito:hover {
+    background-color: #3e8e41;
+}
+#carrito {
+    flex-basis: 30%;
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#carrito-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#carrito-list li {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+#carrito-list li:last-child {
+    border-bottom: none;
+}
+#total {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 20px;
+}
+button[type="button"] {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+button[type="button"]:hover {
+    background-color: #3e8e41;
+}
+.product {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.product img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+.product h3 {
+    font-weight: bold;
+    margin-top: 0;
+}
+.product p {
+    margin-bottom: 10px;
+}
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+nav li {
+    margin-right: 20px;
+}
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+nav a:hover {
+    color: #ccc;
+}
+#productos {
+    flex-basis: 60%;
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#productos h2 {
+    margin-top: 0;
+}
+#carrito {
+    flex-basis: 30%;
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+#carrito h2 {
+    margin-top: 0;
+}  

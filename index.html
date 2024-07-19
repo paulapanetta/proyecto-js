@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Carrito de Compras de Belleza</title>
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+    <script src="./js/main.js"></script>
+    <header>
+        <nav>
+        <ul>
+            <li><a href="">Inicio</a></li>
+            <li><a href="">Productos</a></li>
+            <li><a href="">Carrito</a></li>
+        </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="productos">
+        <h2>Productos de Belleza</h2>
+        <ul>
+            <li>
+            <img src="https://images.pexels.com/photos/5798000/pexels-photo-5798000.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Crema hidratante">
+            <h3>Crema hidratante</h3>
+            <p>Precio: $20.000</p>
+            <p>ID: 1</p>
+            <button class="agregar-al-carrito" data-product-id="1">Agregar al carrito</button>
+            </li>
+            <li>
+                <img src="https://images.pexels.com/photos/7480084/pexels-photo-7480084.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Mascarilla facial">
+                <h3>Mascarilla facial</h3>
+                <p>Precio: $15.000</p>
+                <p>ID: 2</p>
+                <button class="agregar-al-carrito" data-product-id="2">Agregar al carrito</button>
+            </li>
+            <li>
+                <img src="https://images.pexels.com/photos/4041391/pexels-photo-4041391.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Esencia facial">
+                <h3>Esencia facial</h3>
+                <p>Precio: $2.000</p>
+                <p>ID: 3</p>
+                <button class="agregar-al-carrito" data-product-id="3">Agregar al carrito</button>
+            </li>
+            <li>
+                <img src="https://images.pexels.com/photos/11635437/pexels-photo-11635437.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Exfoliante corporal">
+                <h3>Exfoliante corporal</h3>
+                <p>Precio: $25.000</p>
+                <p>ID: 4</p>
+                <button class="agregar-al-carrito" data-product-id="4">Agregar al carrito</button>
+            </li>
+            <li>
+                <img src="https://images.pexels.com/photos/4735896/pexels-photo-4735896.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Crema para manos">
+                <h3>Crema para manos</h3>
+                <p>Precio: $10.000</p>
+                <p>ID: 5</p>
+                <button class="agregar-al-carrito" data-product-id="5">Agregar al carrito</button>
+            </li>
+            <li>
+            <img src="https://images.pexels.com/photos/4210374/pexels-photo-4210374.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Jabon limpiador">
+                <h3>Jabon limpiador</h3>
+                <p>Precio: $6.000</p>
+                <p>ID: 6</p>
+                <button class="agregar-al-carrito" data-product-id="6">Agregar al carrito</button>
+            </li>
+            <li>
+            <img src="https://images.pexels.com/photos/6621450/pexels-photo-6621450.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Locion corporal">
+                <h3>Locion corporal</h3>
+                <p>Precio: $9.000</p>
+                <p>ID: 7</p>
+                <button class="agregar-al-carrito" data-product-id="7">Agregar al carrito</button>
+            </li>
+            <li>
+            <img src="https://images.pexels.com/photos/4806699/pexels-photo-4806699.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Base de maquillaje">
+                <h3>Base de maquillaje</h3>
+                <p>Precio: $3.000</p>
+                <p>ID: 8</p>
+                <button class="agregar-al-carrito" data-product-id="8">Agregar al carrito</button>
+            </li>
+            <li>
+            <img src="https://images.pexels.com/photos/2693646/pexels-photo-2693646.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1g" alt="Polvo fijador">
+                <h3>Polvo fijador</h3>
+                <p>Precio: $15.900</p>
+                <p>ID: 9</p>
+                <button class="agregar-al-carrito" data-product-id="9">Agregar al carrito</button>
+            </li>
+            <li>
+            <img src="https://images.pexels.com/photos/20499753/pexels-photo-20499753/free-photo-of-monitor-mostrar-exhibicion-exposicion.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Rimel">
+                <h3>Rimel</h3>
+                <p>Precio: $12.000</p>
+                <p>ID: 10</p>
+                <button class="agregar-al-carrito" data-product-id="10">Agregar al carrito</button>
+            </li>
+        </ul>
+        </section>
+        <section id="carrito">
+        <h2>Carrito de Compras</h2>
+        <ul id="carrito-list"></ul>
+        <p id="total">Total: $0</p>
+        </section>
+    </main>
+    <script src="script.js"></script>
+    </body>
+    </html>
