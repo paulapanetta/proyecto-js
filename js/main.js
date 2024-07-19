@@ -16,11 +16,11 @@ let carrito = [];
 function agregarAlCarrito(productId) {
   let producto = productos.find(p => p.id === productId);
   if (producto) {
-    let cantidad = parseInt(prompt(`¿Cuántas unidades de ${producto.nombre} deseas agregar al carrito?`));
+    let cantidad = parseInt(prompt(`¿Cuantas unidades de ${producto.nombre} deseas agregar al carrito?`));
     if (cantidad > 0) {
       carrito.push({ producto: producto, cantidad: cantidad });
     } else {
-      mostrarMensaje("Debe ingresar una cantidad válida");
+      mostrarMensaje("Debe ingresar una cantidad valida");
     }
   } else {
     mostrarMensaje("Producto no encontrado");
@@ -39,7 +39,7 @@ function eliminarDelCarrito(productId) {
 function filtrarProductos(nombre) {
   let resultados = productos.filter(p => p.nombre.toLowerCase().includes(nombre.toLowerCase()));
   if (resultados.length > 0) {
-    let mensaje = "Resultados de la búsqueda:\n";
+    let mensaje = "Resultados de la busqueda:\n";
     resultados.forEach(p => {
       mensaje += `${p.nombre} - $${p.precio}\n`;
     });
@@ -51,7 +51,7 @@ function filtrarProductos(nombre) {
 
 function ordenarProductosAlfabetico() {
   productos.sort((a, b) => a.nombre.localeCompare(b.nombre));
-  let mensaje = "Productos ordenados alfabéticamente:\n";
+  let mensaje = "Productos ordenados alfabeticamente:\n";
   productos.forEach(p => {
     mensaje += `${p.nombre} - $${p.precio}\n`;
   });
@@ -75,7 +75,7 @@ function mostrarCarrito() {
   mostrarMensaje(mensaje);
 }
 
-let opcion = parseInt(prompt("¿Qué deseas hacer?\n1. Agregar producto al carrito\n2. Eliminar producto del carrito\n3. Filtrar productos por nombre\n4. Ordenar productos alfabéticamente\n5. Mostrar carrito\n6. Salir al catalogo"));
+let opcion = parseInt(prompt("¿Que deseas hacer?\n1. Agregar producto al carrito\n2. Eliminar producto del carrito\n3. Filtrar productos por nombre\n4. Ordenar productos alfabeticamente\n5. Mostrar carrito\n6. Salir al catalogo"));
 
 while (opcion!== 6) {
   switch (opcion) {
@@ -84,7 +84,7 @@ while (opcion!== 6) {
       if (productId >= 1 && productId <= 10) {
         agregarAlCarrito(productId);
       } else {
-        mostrarMensaje("ID de producto inválido");
+        mostrarMensaje("ID de producto invalido");
       }
       break;
     case 2:
@@ -92,7 +92,7 @@ while (opcion!== 6) {
       if (eliminarId >= 1 && eliminarId <= 10) {
         eliminarDelCarrito(eliminarId);
       } else {
-        mostrarMensaje("ID de producto inválido");
+        mostrarMensaje("ID de producto invalido");
       }
       break;
     case 3:
@@ -106,11 +106,11 @@ while (opcion!== 6) {
       mostrarCarrito();
       break;
     default:
-      mostrarMensaje("Opción inválida");
+      mostrarMensaje("Opcion invalida");
       break;
   }
 
-  opcion = parseInt(prompt("¿Qué deseas hacer?\n1. Agregar producto al carrito\n2. Eliminar producto del carrito\n3. Filtrar productos por nombre\n4. Ordenar productos alfabéticamente\n5. Mostrar carrito\n6. Salir al catalogo"));
+  opcion = parseInt(prompt("¿Que deseas hacer?\n1. Agregar producto al carrito\n2. Eliminar producto del carrito\n3. Filtrar productos por nombre\n4. Ordenar productos alfabeticamente\n5. Mostrar carrito\n6. Salir al catalogo"));
 }
 
 function mostrarMensaje(mensaje) {
