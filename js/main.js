@@ -1,118 +1,108 @@
 let productos = [
-  { id: 1, nombre: "Crema hidratante", precio: 20000 },
-  { id: 2, nombre: "Mascarilla facial", precio: 15000 },
-  { id: 3, nombre: "Esencia facial", precio: 2000 },
-  { id: 4, nombre: "Exfoliante corporal", precio: 25000 },
-  { id: 5, nombre: "Crema para manos", precio: 10000 },
-  { id: 6, nombre: "Jabon limpiador", precio: 6000 },
-  { id: 7, nombre: "Locion corporal", precio: 9000 },
-  { id: 8, nombre: "Base de maquillaje", precio: 3000 },
-  { id: 9, nombre: "Polvo fijador", precio: 15900 },
-  { id: 10, nombre: "Rimel", precio: 12000 }
+  { id: 1, nombre: "Crema hidratante", precio: 20000, cantidad: 0 },
+  { id: 2, nombre: "Mascarilla facial", precio: 15000, cantidad: 0 },
+  { id: 3, nombre: "Esencia facial", precio: 2000, cantidad: 0 },
+  { id: 4, nombre: "Exfoliante corporal", precio: 25000, cantidad: 0 },
+  { id: 5, nombre: "Crema para manos", precio: 10000, cantidad: 0 },
+  { id: 6, nombre: "Jabon limpiador", precio: 6000, cantidad: 0 },
+  { id: 7, nombre: "Locion corporal", precio: 9000, cantidad: 0 },
+  { id: 8, nombre: "Base de maquillaje", precio: 3000, cantidad: 0 },
+  { id: 9, nombre: "Polvo fijador", precio: 15900, cantidad: 0 },
+  { id: 10, nombre: "Rimel", precio: 12000, cantidad: 0 }
 ];
 
 let carrito = [];
 
+function mostrarProductos() {
+  const listaProductos = document.getElementById('lista-productos');
+  listaProductos.innerHTML = '';
+  productos.forEach(producto => {
+    const item = document.createElement('li');
+    item.innerHTML = `
+      <h3>${producto.nombre}</h3>
+      <p>Precio: $${producto.precio}</p>
+      <p>ID: ${producto.id}</p>
+      <button class="agregar-al-carrito" id="agregar-${producto.id}">Agregar al carrito</button>
+    `;
+    const botonAgregar = item.querySelector('button');
+    botonAgregar.addEventListener('click', () => {
+      agregarAlCarrito(producto.id);
+    });
+    listaProductos.appendChild(item);
+  });
+}
+
 function agregarAlCarrito(productId) {
-  let producto = productos.find(p => p.id === productId);
+  const producto = productos.find(p => p.id === productId);
   if (producto) {
-    let cantidad = parseInt(prompt(`¿Cuantas unidades de ${producto.nombre} deseas agregar al carrito?`));
+    const cantidad = parseInt(prompt(`¿Cuántas unidades de ${producto.nombre} deseas agregar al carrito?`));
     if (cantidad > 0) {
-      carrito.push({ producto: producto, cantidad: cantidad });
+      const itemCarrito = carrito.find(item => item.producto.id === productId);
+      if (itemCarrito) {
+        itemCarrito.cantidad += cantidad;
+      } else {
+        carrito.push({ producto, cantidad });
+      }
+      mostrarCarrito();
     } else {
-      mostrarMensaje("Debe ingresar una cantidad valida");
+      alert('Debe ingresar una cantidad válida');
     }
   } else {
-    mostrarMensaje("Producto no encontrado");
+    alert('Producto no encontrado');
   }
-}
-
-function eliminarDelCarrito(productId) {
-  let index = carrito.findIndex(p => p.producto.id === productId);
-  if (index!== -1) {
-    carrito.splice(index, 1);
-  } else {
-    mostrarMensaje("Producto no encontrado en el carrito");
-  }
-}
-
-function filtrarProductos(nombre) {
-  let resultados = productos.filter(p => p.nombre.toLowerCase().includes(nombre.toLowerCase()));
-  if (resultados.length > 0) {
-    let mensaje = "Resultados de la busqueda:\n";
-    resultados.forEach(p => {
-      mensaje += `${p.nombre} - $${p.precio}\n`;
-    });
-    mostrarMensaje(mensaje);
-  } else {
-    mostrarMensaje("No se encontraron productos con ese nombre");
-  }
-}
-
-function ordenarProductosAlfabetico() {
-  productos.sort((a, b) => a.nombre.localeCompare(b.nombre));
-  let mensaje = "Productos ordenados alfabeticamente:\n";
-  productos.forEach(p => {
-    mensaje += `${p.nombre} - $${p.precio}\n`;
-  });
-  mostrarMensaje(mensaje);
-}
-
-function calcularTotal() {
-  let total = 0;
-  carrito.forEach(p => {
-    total += p.cantidad * p.producto.precio;
-  });
-  return total;
 }
 
 function mostrarCarrito() {
-  let mensaje = "Carrito de compras:\n";
-  carrito.forEach(p => {
-    mensaje += `${p.producto.nombre} x ${p.cantidad} = $${p.cantidad * p.producto.precio}\n`;
+  const listaCarrito = document.getElementById('lista-carrito');
+  listaCarrito.innerHTML = '';
+
+  carrito.forEach(item => {
+    const producto = item.producto;
+    const cantidad = item.cantidad;
+    const total = producto.precio * cantidad;
+
+    const itemCarrito = document.createElement('li');
+    itemCarrito.classList.add('carrito');
+    itemCarrito.innerHTML = `
+      <h3>${producto.nombre} x ${cantidad}</h3>
+      <p>Total: $${total.toFixed(2)}</p>
+      <button id="eliminar-${producto.id}">Eliminar del carrito</button>
+    `;
+    listaCarrito.appendChild(itemCarrito);
+
+    const eliminarButton = itemCarrito.querySelector(`#eliminar-${producto.id}`);
+    eliminarButton.addEventListener('click', () => {
+      eliminarDelCarrito(producto.id);
+    });
   });
-  mensaje += `Total: $${calcularTotal()}`;
-  mostrarMensaje(mensaje);
+
+
+  let totalCarrito = 0;
+  carrito.forEach(item => {
+    totalCarrito += item.producto.precio * item.cantidad;
+  });
+  const totalCarritoElemento = document.getElementById('total-carrito');
+  totalCarritoElemento.innerText = `Total: $${totalCarrito.toFixed(2)}`;
 }
 
-let opcion = parseInt(prompt("¿Que deseas hacer?\n1. Agregar producto al carrito\n2. Eliminar producto del carrito\n3. Filtrar productos por nombre\n4. Ordenar productos alfabeticamente\n5. Mostrar carrito\n6. Salir al catalogo"));
-
-while (opcion!== 6) {
-  switch (opcion) {
-    case 1:
-      let productId = parseInt(prompt("Ingrese el ID del producto que deseas agregar al carrito (1-10)"));
-      if (productId >= 1 && productId <= 10) {
-        agregarAlCarrito(productId);
-      } else {
-        mostrarMensaje("ID de producto invalido");
-      }
-      break;
-    case 2:
-      let eliminarId = parseInt(prompt("Ingrese el ID del producto que deseas eliminar del carrito (1-10)"));
-      if (eliminarId >= 1 && eliminarId <= 10) {
-        eliminarDelCarrito(eliminarId);
-      } else {
-        mostrarMensaje("ID de producto invalido");
-      }
-      break;
-    case 3:
-      let nombre = prompt("Ingrese el nombre del producto que deseas filtrar");
-      filtrarProductos(nombre);
-      break;
-    case 4:
-      ordenarProductosAlfabetico();
-      break;
-    case 5:
+function eliminarDelCarrito(productId) {
+  const index = carrito.findIndex(item => item.producto.id === productId);
+  if (index !== -1) {
+    if (confirm(`¿Estás seguro de que deseas eliminar ${carrito[index].producto.nombre} del carrito?`)) {
+      carrito.splice(index, 1);
       mostrarCarrito();
-      break;
-    default:
-      mostrarMensaje("Opcion invalida");
-      break;
+    }
+  } else {
+    alert('Producto no encontrado en el carrito');
   }
-
-  opcion = parseInt(prompt("¿Que deseas hacer?\n1. Agregar producto al carrito\n2. Eliminar producto del carrito\n3. Filtrar productos por nombre\n4. Ordenar productos alfabeticamente\n5. Mostrar carrito\n6. Salir al catalogo"));
 }
 
-function mostrarMensaje(mensaje) {
-  alert(mensaje);
+const vaciarCarrito = document.getElementById('vaciar-carrito');
+if (vaciarCarrito) {
+  vaciarCarrito.addEventListener('click', () => {
+    carrito = [];
+    mostrarCarrito();
+  });
 }
+
+mostrarProductos();
