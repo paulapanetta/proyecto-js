@@ -14,7 +14,7 @@ let productos = [
 let carrito = [];
 
 function mostrarProductos() {
-  const listaProductos = document.getElementById('lista-productos');
+  const listaProductos = document.getElementById('lista-carrito');
   listaProductos.innerHTML = '';
   productos.forEach(producto => {
     const item = document.createElement('li');
@@ -75,7 +75,6 @@ function mostrarCarrito() {
       eliminarDelCarrito(producto.id);
     });
   });
-
 
   let totalCarrito = 0;
   carrito.forEach(item => {
