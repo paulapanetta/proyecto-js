@@ -1,5 +1,6 @@
-let productos = [
-  { id: 1, nombre: "Crema hidratante", precio: 20000, cantidad: 0 },
+const Swal = require('sweetalert2')
+
+let productos = [{ id: 1, nombre: "Crema hidratante", precio: 20000, cantidad: 0 },
   { id: 2, nombre: "Mascarilla facial", precio: 15000, cantidad: 0 },
   { id: 3, nombre: "Esencia facial", precio: 2000, cantidad: 0 },
   { id: 4, nombre: "Exfoliante corporal", precio: 25000, cantidad: 0 },
@@ -8,13 +9,22 @@ let productos = [
   { id: 7, nombre: "Locion corporal", precio: 9000, cantidad: 0 },
   { id: 8, nombre: "Base de maquillaje", precio: 3000, cantidad: 0 },
   { id: 9, nombre: "Polvo fijador", precio: 15900, cantidad: 0 },
-  { id: 10, nombre: "Rimel", precio: 12000, cantidad: 0 }
-];
+  { id: 10, nombre: "Rimel", precio: 12000, cantidad: 0 }];
 
 let carrito = [];
 
+function cargarProductos() {
+  return fetch('productos.json')
+    .then(response => response.json())
+    .then(data => {
+      productos = data;
+      mostrarProductos();
+    })
+    .catch(error => console.error('Error cargando productos:', error));
+}
+
 function mostrarProductos() {
-  const listaProductos = document.getElementById('lista-carrito');
+  const listaProductos = document.getElementById('productos');
   listaProductos.innerHTML = '';
   productos.forEach(producto => {
     const item = document.createElement('li');
@@ -35,22 +45,22 @@ function mostrarProductos() {
 function agregarAlCarrito(productId) {
   const producto = productos.find(p => p.id === productId);
   if (producto) {
-    const cantidad = parseInt(prompt(`¿Cuántas unidades de ${producto.nombre} deseas agregar al carrito?`));
-    if (cantidad > 0) {
-      const itemCarrito = carrito.find(item => item.producto.id === productId);
-      if (itemCarrito) {
-        itemCarrito.cantidad += cantidad;
-      } else {
-        carrito.push({ producto, cantidad });
-      }
-      mostrarCarrito();
-    } else {
-      alert('Debe ingresar una cantidad válida');
-    }
+  const cantidad = parseInt(prompt(`¿Cuántas unidades de ${producto.nombre} deseas agregar al carrito?`));
+  if (cantidad > 0) {
+  const itemCarrito = carrito.find(item => item.producto.id === productId);
+  if (itemCarrito) {
+  itemCarrito.cantidad += cantidad;
   } else {
+  carrito.push({ producto, cantidad });
+  }
+    mostrarCarrito();
+      } else {
+        alert('Debe ingresar una cantidad válida');
+      }
+    } else {
     alert('Producto no encontrado');
   }
-}
+  }
 
 function mostrarCarrito() {
   const listaCarrito = document.getElementById('lista-carrito');
@@ -87,21 +97,36 @@ function mostrarCarrito() {
 function eliminarDelCarrito(productId) {
   const index = carrito.findIndex(item => item.producto.id === productId);
   if (index !== -1) {
-    if (confirm(`¿Estás seguro de que deseas eliminar ${carrito[index].producto.nombre} del carrito?`)) {
-      carrito.splice(index, 1);
-      mostrarCarrito();
-    }
+    Swal.fire({
+      title: `¿Estás seguro de que deseas eliminar ${carrito[index].producto.nombre} del carrito?`,
+      showCancelButton: true,
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then(result => {
+      if (result.value) {
+        carrito.splice(index, 1);
+        mostrarCarrito();
+      }
+    });
   } else {
-    alert('Producto no encontrado en el carrito');
+    Swal.fire('Error', 'Producto no encontrado en el carrito', 'error');
   }
 }
 
 const vaciarCarrito = document.getElementById('vaciar-carrito');
 if (vaciarCarrito) {
   vaciarCarrito.addEventListener('click', () => {
-    carrito = [];
-    mostrarCarrito();
+    Swal.fire({
+      title: '¿Estás seguro de que deseas vaciar el carrito?',
+      showCancelButton: true,
+      confirmButtonText: 'Vaciar',
+      cancelButtonText: 'Cancelar'
+    }).then(result => {
+      if (result.value) {
+        carrito = [];
+        mostrarCarrito();
+      }
+    });
   });
 }
-
 mostrarProductos();
