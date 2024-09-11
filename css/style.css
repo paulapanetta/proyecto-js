@@ -97,6 +97,7 @@ main {
     font-size: 18px;
     margin-top: 20px;
 }
+
 button[type="button"] {
     background-color: #4CAF50;
     color: #fff;

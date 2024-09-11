@@ -1,4 +1,4 @@
-const Swal = require('sweetalert2')
+const Swal = require ('sweetalert2');
 
 let productos = [{ id: 1, nombre: "Crema hidratante", precio: 20000, cantidad: 0 },
   { id: 2, nombre: "Mascarilla facial", precio: 15000, cantidad: 0 },
@@ -32,12 +32,9 @@ function mostrarProductos() {
       <h3>${producto.nombre}</h3>
       <p>Precio: $${producto.precio}</p>
       <p>ID: ${producto.id}</p>
+      <input type="number" id="cantidad-${producto.id}" min="1" value="1">
       <button class="agregar-al-carrito" id="agregar-${producto.id}">Agregar al carrito</button>
     `;
-    const botonAgregar = item.querySelector('button');
-    botonAgregar.addEventListener('click', () => {
-      agregarAlCarrito(producto.id);
-    });
     listaProductos.appendChild(item);
   });
 }
@@ -45,22 +42,37 @@ function mostrarProductos() {
 function agregarAlCarrito(productId) {
   const producto = productos.find(p => p.id === productId);
   if (producto) {
-  const cantidad = parseInt(prompt(`¿Cuántas unidades de ${producto.nombre} deseas agregar al carrito?`));
-  if (cantidad > 0) {
-  const itemCarrito = carrito.find(item => item.producto.id === productId);
-  if (itemCarrito) {
-  itemCarrito.cantidad += cantidad;
-  } else {
-  carrito.push({ producto, cantidad });
-  }
-    mostrarCarrito();
-      } else {
-        alert('Debe ingresar una cantidad válida');
+    const cantidadInput = document.createElement('input');
+    cantidadInput.type = 'number';
+    cantidadInput.min = 1;
+    cantidadInput.value = 1;
+
+    Swal.fire({
+      title: `¿Cuántas unidades de ${producto.nombre} deseas agregar al carrito?`,
+      html: cantidadInput,
+      showCancelButton: true,
+      confirmButtonText: 'Agregar',
+      cancelButtonText: 'Cancelar'
+    }).then(result => {
+      if (result.value) {
+        const cantidad = parseInt(cantidadInput.value);
+        if (cantidad > 0) {
+          const itemCarrito = carrito.find(item => item.producto.id === productId);
+          if (itemCarrito) {
+            itemCarrito.cantidad += cantidad;
+          } else {
+            carrito.push({ producto, cantidad });
+          }
+          mostrarCarrito();
+        } else {
+          Swal.fire('Error', 'Debe ingresar una cantidad válida', 'error');
+        }
       }
-    } else {
-    alert('Producto no encontrado');
+    });
+  } else {
+    Swal.fire('Error', 'Producto no encontrado', 'error');
   }
-  }
+}
 
 function mostrarCarrito() {
   const listaCarrito = document.getElementById('lista-carrito');
